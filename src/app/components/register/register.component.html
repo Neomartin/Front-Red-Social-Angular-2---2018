@@ -1,0 +1,95 @@
+<div class="col-6">
+    <h1 class="h1-main">{{title}}</h1>
+    
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        <h5>
+
+                Registro creado <b> correctamente
+            </b>      
+            <br>
+            <br>
+        <a routerLink="/login" class="btn btn-success">Identificate aquí</a>
+    </h5>
+    </div>
+    <div class="alert alert-warning" *ngIf="status == 'warning'">
+        <h5>
+            <b>Error:</b>
+        </h5>
+        <!-- El registro <b>no</b>  se pudo crear correctamente. -->
+        <p [innerHTML]="message"></p>
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'danger'">
+        <h5>
+            <b>
+                Error
+            </b> 
+        </h5>
+            No se pudo crear el nuevo usuario.        
+    </div>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-10">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" id="name"
+                [(ngModel)]="user.name" name="name" #name="ngModel" 
+                placeholder="Ingrese su nombre" [minlength]="4" required>
+            <div [hidden]="name.valid || name.pristine || name.untouched"
+                class="alert alert-danger">
+                Nombre es requerido
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Apellido</label>
+            <input type="text" class="form-control" id="surname"
+                [(ngModel)]="user.surname" name="surname" #surname="ngModel" 
+                placeholder="Ingrese su Apellido" [minlength]="4" required>
+            <div [hidden]="surname.valid || surname.pristine"
+                class="alert alert-danger">
+                Apellido es requerido
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Nick</label>
+            <input type="text" class="form-control" id="nick"
+                [(ngModel)]="user.nick" name="nick" #nick="ngModel" 
+                placeholder="Nick" [minlength]="3" required>
+            <div [hidden]="nick.valid || nick.pristine"
+                class="alert alert-danger">
+                Nick es requerido
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Email</label>
+            <input type="email" class="form-control" id="email"
+                [(ngModel)]="user.email" name="email" #email="ngModel" 
+                placeholder="Correo electronico" [minlength]="6" required email>
+            <div [hidden]="email.valid || email.pristine"
+                class="alert alert-danger">
+                Correo electronico (Email) es requerido
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Contraseña</label>
+            <input type="password" class="form-control" id="password"
+                [(ngModel)]="user.password" name="password" #password="ngModel" 
+                placeholder="Contraseña" [minlength]="4" required>
+            <div [hidden]="password.valid || password.pristine"
+                class="alert alert-danger">
+                Contraseña es obligatoria.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Repita Contraseña</label>
+            <input type="password" class="form-control" id="password2"
+                [(ngModel)]="password2" name="password2"
+                placeholder="Repita Contraseña" [minlength]="4" required>
+            <div [hidden]="password2.valid || password2.pristine || password2 == '' || password2 == user.password"
+                class="alert alert-danger">
+                Esta contraseña debe ser igual a la colocada anteriormente.
+            </div>      
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid || user.password != password2 || user.password == '' || password2 == ''">Registrar</button>
+    </form>  
+</div>
+
+
+

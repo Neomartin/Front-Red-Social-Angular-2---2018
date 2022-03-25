@@ -1,0 +1,41 @@
+<h1 class="h1-main">
+    {{ title }}
+</h1>
+<div class="row">
+    <div class="col-8 publication-container">
+            <div *ngIf="publications">
+                <div *ngFor="let pub of publications">
+                    <div class="card border-primary mb-3">
+                        <div class="card-body row">
+                            <div class="col-lg-3 text-center" >
+                                {{ pub.image }}
+                                    <img class="card-img-top" *ngIf="pub.user.image" src="{{ globalUrl + 'get-image-file/' + pub.user.image }}" alt="Card image cap">
+                                    <img class="card-img-top" *ngIf="!pub.user.image" src="assets/images/default-image.png" alt="Card image cap">
+                                    <span class="mini">{{ pub.created_at*1000 | date: 'longDate'}}</span>
+                            </div>
+                            <div class="col-lg-8">
+                                <p class="card-title text-warning">{{ pub.text }}</p>
+                                <div *ngIf="pub.file">
+                                    <img class="pub-image" src="{{ globalUrl + 'get-image-pub/'+pub.file }}" alt="">
+                                </div>
+                                <hr>
+                                <p class="card-text">
+                                    <a [routerLink]="['/profile/', pub.user._id]" href="">{{ pub.user.name }}</a>
+                                    &nbsp; - &nbsp;
+                                    <span class="comment">{{ (pub.created_at | amFromUnix ) | amLocale:'es' | amTimeAgo }}</span> <br> 
+                                </p>
+                            </div> 
+                            <div class="col-lg-1">
+                                
+                                <div (click)="deletePublication(pub._id)" *ngIf="pub.user._id == user._id" class="btn btn-danger">X</div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                    <button class="btn btn-success" (click)="morePublications()" *ngIf="page != pages">Ver mas</button>
+            </div>
+    </div>  
+    <sidebar (sended)="getPublications(false)" class="col-4"></sidebar>     
+</div>

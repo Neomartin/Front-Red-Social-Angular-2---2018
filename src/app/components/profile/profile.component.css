@@ -1,0 +1,14 @@
+.text-default {
+    color: #999
+}
+.flex-column {
+    width: 100%
+}
+.profile-back {
+    padding: 20px auto 0px;
+    margin: 0 20px;
+}
+
+.profile-back a{
+    border-top:1px solid #bbb
+}

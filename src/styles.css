@@ -1,1 +1,108 @@
 /* You can add global styles to this file, and also import other style files */
+/* .svg-white{
+    fill: white;
+} */
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+.ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+}
+
+.h1-main {
+    font-weight: bold;
+    margin: 25px 20px;
+    border-bottom: 1px solid #aaa;
+}
+/* navbar menu */
+.link-active {
+    /* background-color: #42A948 */
+}
+.jumbotron{
+
+}   
+.jumbotron .display-4.h1-main {
+    font-weight: normal !important;;
+    text-align: center;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    font-weight: bold
+}
+i {
+    font-size: 1em
+}
+.profile-image {
+    width: 100%
+}
+.nickname {
+    text-transform: uppercase
+}
+.nickname span {
+    text-transform: lowercase;
+    padding-left: 30px;
+}
+img.users {
+    width: 100%;
+}
+.users-row {
+    margin: 0 !important;
+}
+.users-logued {
+    margin: 0 !important;
+    padding: 0 !important
+}
+.no-padding {
+    padding: 0 !important
+}
+.users-main img{
+    padding-left: 15px;
+}
+.stats {
+    font-size: 0.9em
+}
+.stats .list-group-item {
+    padding: 0.25em;
+}
+.stats p {
+    font-weight: bold;
+    font-size: 1.3em
+}
+#new-publication {
+    margin-top: 10px
+}
+.comment {
+    color: #999;
+    font-style: italic;
+    font-weight: lighter
+}
+.mini {
+    font-size: 0.8em
+}
+.publication-container .card-body {
+    padding: 0.5em 0.75em
+}
+.publications-stats {
+    margin-bottom: 15px;
+}
+
+.pub-image {
+    position: relative;
+    width: 100%;
+}
+
+/* PROFILE */
+.profile-name {
+    padding: 10px 20px;
+    border: 1px solid #999;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    width: 100%
+}
+.profile-name h2{
+    text-align: center;
+    font-weight: normal;
+    color: #ffa200;
+}
+
+

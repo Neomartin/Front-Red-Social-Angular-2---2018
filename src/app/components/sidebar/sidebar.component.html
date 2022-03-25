@@ -1,0 +1,53 @@
+<!-- <button class="btn btn-secondary" (click)="getCounters()">Contadores</button> -->
+  <div class="card">
+    <img class="card-img-top" *ngIf="user.image" src="{{ globalUrl + 'get-image-file/' + user.image }}" alt="Card image cap">
+    <img class="card-img-top" *ngIf="!user.image" src="assets/images/default-image.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">
+        <a href="" [routerLink]="['/profile', user._id]"
+                   class="sidebar-link">{{ user.name + ' ' + user.surname}}</a>
+        {{ user._id }}
+      </h5>
+      <hr>
+      <p>{{ user.nick}}</p>
+      <p class="text-info">{{ user.email}}</p>
+      <div class="card-header">
+        <b>ESTADISTICAS</b>
+      </div>
+      <div class="row text-center stats">
+        <div class="list-group-item col-md-4">
+          <a [routerLink]="['/following', user._id, 1]">Seguidores: </a>
+          <p class="text-info">{{ counter.followersCount }}</p>
+        </div>
+        <div class="list-group-item col-md-4">
+          Siguiendo:
+          <p class="text-info">{{ counter.followingCount }}</p>
+        </div>
+        <div class="list-group-item col-md-4">
+          Publicaciones:
+          <p class="text-info">{{ counter.publicatonsCount }}</p>
+        </div>
+      </div>
+      <br>
+      <a href="#" routerLink="/user-edit" class="btn btn-primary"><i class="icon ion-md-settings"></i>Editar Perfil</a>
+    </div>
+  </div>
+  <div id="new-publication" class="card">
+
+    <div class="card-body">
+        <h3>Crear Publicacion</h3>
+        <form #publicationForm="ngForm" (ngSubmit)="onSubmit(publicationForm); send()">
+          <div class="form-group col-12">
+              <label for="text">Que estas pensando hoy?</label><br>
+              <textarea name="texto" [(ngModel)]="publication.text" style="width:100%"
+              #texto="ngModel" placeholder="Ingrese texto" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="pubFile">Archivo</label><br>
+            <input type="file" placeholder="Elegir imagen" (change)="fileChangeEvent($event)" multiple>
+          </div>
+          <input type="submit" [disabled]="!publicationForm.form.valid" class="btn btn-primary" value="Publicar">
+        </form>
+    </div>
+
+  </div>

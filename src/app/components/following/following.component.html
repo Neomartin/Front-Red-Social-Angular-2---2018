@@ -1,0 +1,84 @@
+<h1 class="h1-main">
+    {{ title }}
+</h1>
+<div class="row users-row ">
+    <div class="col-md-8 users-main">
+            <button type="button" class="btn btn-primary">
+                    Total de Usuarios <span class="badge badge-light">{{ total }}</span>
+            </button>
+            <button type="button" class="btn btn-success">
+                    Paginas: <span class="badge badge-light">{{ pages }}</span>
+            </button>
+            <div *ngFor="let userItem of users">
+                <br>
+                <div class="card">
+                    <!-- <img class="card-img-top" *ngIf="user.image" src="{{ globalUrl + 'get-image-file/' + user.image }}" alt="Card image cap"> -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 no-padding">
+                                <img *ngIf="userItem.user.image" src="{{ globalUrl + 'get-image-file/' + userItem.user.image}}" alt="" class="users">
+                                <img *ngIf="!userItem.user.image" src="assets/images/default-image.png" alt="" class="users">
+                            </div>
+                            <div class="col-md-8">
+                                <a href="" [routerLink]="['/profile', userItem.user._id]">
+                                    <h5 class="card-title"><span class="text-info">{{ userItem.user.name }} </span>{{' ' + userItem.user.surname}}</h5>
+                                </a>
+                                <hr>
+                                <p class="nickname">{{ userItem.user.nick}}
+                                <span class="text-primary"><i class="icon ion-md-mail-open"></i> {{ userItem.user.email}}</span>
+                                </p>
+                                <!-- <p>
+                                    <button class="btn btn-primary" *ngIf="follows.indexOf(userItem._id) >= 0"
+                                        (click)="unfollow(userItem._id)"
+                                        (mouseenter)="mouseEnter(userItem._id)"
+                                        (mouseleave)="mouseLeave()"
+                                        [class.btn-danger]="userItem._id === followUserOver">
+                                        <span *ngIf="userItem._id === followUserOver">
+                                                <i class="icon ion-md-close-circle-outline"></i> Unfollow
+                                        </span>
+                                        <span *ngIf="userItem._id != followUserOver">
+                                            <i class="icon ion-md-contacts"></i> Siguiendo
+                                        </span>
+                                    </button>
+                                    <button class="btn btn-success" (click)="seguir(userItem._id)" *ngIf="follows.indexOf(userItem._id) < 0">
+                                            <i class="icon ion-md-person-add"></i> Seguir</button>    
+                                </p> -->
+                           </div>
+                           
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" [ngClass]="{'disabled': prev_page < 1}">
+                    <a class="page-link" href="#" tabindex="-1" [routerLink]="['/users', prev_page]">Anterior</a>
+                    </li>
+                    <li class="page-item" *ngIf="page > 1" [routerLink]="['/users', page - 1]">
+                        <span class="page-link">
+                            {{ page - 1 }}
+                        </span>
+                    </li>
+                    <li class="page-item active">
+                        <span class="page-link">
+                            {{ page }}
+                        <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                    <li class="page-item" *ngIf="page != pages" [routerLink]="['/users', page +1]">
+                            <span class="page-link">
+                                {{ page + 1 }}
+                            </span>
+                    </li>
+                    <li class="page-item" [ngClass]="{'disabled': next_page > pages}">
+                    <a class="page-link" href="#" [routerLink]="['/follows/', next_page]">Siguiente</a>
+                    </li>
+                </ul>
+            </nav>
+    </div>
+    <div class="col-md-4 users-logued">
+        <sidebar></sidebar>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<h1 class="h1-main">{{title}}</h1>
+<div class="row">
+    <div class="col-md-6">
+            <form #userEditForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="alert alert-success" *ngIf="status == 'success'">
+                    <h5>
+                            Datos actualizados <b> correctamente </b>      
+                        <br>
+                        <br>
+                    </h5>
+                </div>
+                <div class="alert alert-danger" *ngIf="status == 'danger'">
+                    <h5>
+                        <b>
+                            Error: <span *ngIf="error">{{ error }}</span> 
+                        </b> 
+                    </h5>
+                        No se pudieron actualizar los datos.      
+                </div>
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control" id="name" (keyup)=isDiferent()
+                        [(ngModel)]="user.name" name="name" #name="ngModel" 
+                        placeholder="Ingrese su nombre" [minlength]="5" required>
+                    <div [hidden]="name.valid || name.pristine || name.untouched"
+                        class="alert alert-danger">
+                        Nombre no puede estar vacio
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Apellido</label>
+                    <input type="text" class="form-control" id="surname" (keyup)=isDiferent()
+                        [(ngModel)]="user.surname" name="surname" #surname="ngModel" 
+                        placeholder="Ingrese su Apellido" [minlength]="5" required>
+                    <div [hidden]="surname.valid || surname.pristine"
+                        class="alert alert-danger">
+                        Apellido es requerido
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nick</label>
+                    <input type="text" class="form-control" id="nick" (keyup)=isDiferent()
+                        [(ngModel)]="user.nick" name="nick" #nick="ngModel" 
+                        placeholder="Nick" [minlength]="3" required>
+                    <div [hidden]="nick.valid || nick.pristine"
+                        class="alert alert-danger">
+                        Nick es requerido
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Email</label>
+                    <input type="email" class="form-control" id="email" (keyup)=isDiferent()
+                        [(ngModel)]="user.email" name="email" #email="ngModel" 
+                        placeholder="Correo electronico" [minlength]="6" required email>
+                    <div [hidden]="email.valid || email.pristine"
+                        class="alert alert-danger">
+                        Correo electronico (Email) es requerido
+                    </div>
+                </div>
+                
+                <br>
+
+                <span *ngIf="!changed" class="text-danger">No se han detectado cambios</span> 
+                <br>    
+                <button type="submit" class="btn btn-success" [disabled]="!userEditForm.form.valid || !changed">Actualizar Datos</button>
+            </form>
+    </div>
+    <div class="col-md-6">
+            <div class="alert alert-success" *ngIf="imageStatus == 'success'">
+                    <h5>
+            
+                            Imagen actualizada <b> correctamente </b>      
+                        <br>
+                        <br>
+                </h5>
+                </div>
+            <div class="alert alert-danger" *ngIf="imageStatus == 'danger'">
+                <h5>
+                    <b>
+                        Error: <span *ngIf="error">{{ error }}</span> 
+                    </b> 
+                </h5>
+                    No se pudo actualizar la imagen.      
+            </div>
+
+            <div class="form-group">
+                    <label for="avatar">Sube tu Avatar</label>
+                    <input type="file" class="form-control-file" name="avatar" 
+                        (change)=fileChange($event) placeholder="Sube tu imagen de avatar">
+                </div>
+                <hr *ngIf="user.image">
+            <img class="profile-image" src="{{ url + 'get-image-file/'+ user.image}}" alt="" *ngIf="user.image"> 
+            <hr>
+            <button class="btn btn-info" [disabled]='!imgCtrl' (click)="uploadImage()" >Subir Imagen</button>
+    </div>
+</div>

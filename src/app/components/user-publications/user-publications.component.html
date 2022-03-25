@@ -1,0 +1,28 @@
+<div class="h1-main">
+    {{ title }}
+</div>
+<div *ngIf="publications">
+    <div *ngFor="let pub of publications">
+        <div class="card border-primary mb-3">
+            <div class="card-body row">
+                <div class="col-lg-3 text-center" >
+                    <img class="card-img-top" *ngIf="image" src="{{ globalUrl + 'get-image-file/' + image }}" alt="Card image cap">
+                    <img class="card-img-top" *ngIf="!image" src="assets/images/default-image.png" alt="Card image cap">
+                    <span class="mini">{{ pub.created_at*1000 | date: 'longDate'}}</span>
+                </div>
+                <div class="col-lg-8">
+                    <p class="card-title text-warning">{{ pub.text }}</p>
+                    <hr>
+                    <p class="card-text">
+                        <span class="comment">{{ (pub.created_at | amFromUnix ) | amLocale:'es' | amTimeAgo }}</span> <br> 
+                    </p>
+                </div> 
+                <div class="col-lg-1">
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="text-center" >
+            <button class="btn btn-success" (click)="morePublications()" *ngIf="page != pages">Ver mas</button>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<h1 class="h1-main">
+    {{ title }}
+</h1>
+<div class="row">
+    <div class="row col-8">
+        <div class="d-flex flex-column" *ngIf="user">
+            <div class="profile-name">
+                <h2>{{ user.name + ' ' + user.surname }}</h2>
+            </div>
+            <div class="row">
+                <div class="col-5">
+                        <img class="card-img-top" *ngIf="user.image" src="{{ globalUrl + 'get-image-file/' + user.image }}" alt="Card image cap">
+                        <img class="card-img-top" *ngIf="!user.image" src="assets/images/default-image.png" alt="Card image cap">
+                </div>
+                <div class="col-7">
+                    <ul class="list-group">
+                        <li class="list-group-item active">DATOS USUARIO</li>
+                        <li class="list-group-item"><b>Email: </b> {{ user.email }}</li>
+                        <li class="list-group-item"><b>Nick: </b> {{ user.nick }}</li>
+                        <li class="list-group-item"><b>Rol: </b> {{ user.role }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div class="row profile-bottom-stats">
+                <div class="col-6">
+                    <div class="text-center">
+                        <button class="disable btn btn-primary" (click)="unfollowUser(user._id)"
+                                (mouseenter)="mouseEnter(user._id)"
+                                (mouseleave)="mouseLeave()" [class.btn-danger]="user._id == buttonEffect" 
+                                *ngIf="following">
+                                <span *ngIf="user._id == buttonEffect; else following">Dejar de Seguir</span>
+                                <ng-template #following>Siguiendo</ng-template>
+                                
+                        </button>
+                        <button class="disable btn btn-success" *ngIf="!following && identity._id != user._id" (click)="followUser(user._id)">Seguir</button>
+                        <button class="disable btn btn-default disabled" *ngIf="identity._id === user._id">Seguir</button>
+                        <h4>Usuarios que lo SIGUEN:
+                        <br>
+                        <span *ngIf="followingCount"  class="badge badge-primary">{{ followingCount }}</span>
+                        <span *ngIf="!followingCount" class="badge badge-primary">0</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-center">
+                        <button class="disabled btn btn-success" *ngIf="followed">Te sigue</button>
+                        <button class="disabled btn btn-default" *ngIf="!followed">No te sigue</button>
+                        <h4>Usuarios que SIGUE:  
+                        <br> 
+                        <span *ngIf="followedCount" class="badge badge-success">{{ followedCount }}</span>
+                        <span *ngIf="!followedCount" class="badge badge-success">0</span>
+                        </h4>
+                    </div>
+                </div>
+                <!-- <div class="col-12 text-center profile-back">
+                        <a class="btn btn-danger" [routerLink]="['/publications']" href="">
+                            Volver
+                        </a>
+                </div> -->
+            </div>
+            
+        </div>
+        <div *ngIf="!user" class="text-center col-12">
+            <h2 class="text-default">
+                No se encontro usuario
+            </h2>
+        </div>
+        <user-publications [image]="imageUrl" *ngIf="user"></user-publications>
+    </div>
+    <sidebar class="col-4"></sidebar> 
+    
+</div>
+
